@@ -7,7 +7,14 @@ target 'ChatApp' do
 
   # Pods for ChatApp
 
+  pod 'Firebase/Auth'
+  pod 'Firebase/Core'
+  pod 'Firebase/Database'
+  pod 'Firebase/Storage'
   pod 'SnapKit', '~> 5.0.0'
+  pod 'MessageKit'
+  pod 'JGProgressHUD'
+  pod 'SDWebImage'
 
   target 'ChatAppTests' do
     inherit! :search_paths

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -14,10 +15,32 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+        guard let windowScene = (scene as? UIWindowScene) else { return }
+        window?.windowScene = windowScene
+        window?.makeKeyAndVisible()
+        //let vC = UserInfoController()
+        
+        if Auth.auth().currentUser == nil{
+            let VC = NewUsersPhoneViewController(nibName: nil, bundle: nil)
+            let navVC = UINavigationController(rootViewController: VC)
+            window?.rootViewController = navVC
+        }else{
+            let VC = TabBarController(nibName: nil, bundle: nil)
+            window?.rootViewController = VC
+        }
+//        }else if Auth.auth().currentUser != nil && vC.switcher == false{
+//            let vc = UserInfoController(nibName: nil, bundle: nil)
+//            let navVC = UINavigationController(rootViewController: vc)
+//            window?.rootViewController = navVC
+//        }else if Auth.auth().currentUser != nil && vC.switcher == true {
+//            let vc = ChatsViewController(nibName: nil, bundle: nil)
+//            let navVC = UINavigationController(rootViewController: vc)
+//            window?.rootViewController = navVC
+//        }
+        
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
-        guard let _ = (scene as? UIWindowScene) else { return }
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
